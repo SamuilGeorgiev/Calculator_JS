@@ -1,0 +1,89 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Calculator container */
+.calculator {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 280px;
+}
+
+/* Display screen */
+.calculator-display {
+    background-color: #222;
+    color: white;
+    font-size: 2em;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+/* Button grid */
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+/* Buttons */
+.calculator-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.5em;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calculator-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style for the operator buttons */
+.calculator-button-operator {
+    background-color: #ff9500;
+    color: white;
+}
+
+.calculator-button-operator:hover {
+    background-color: #e68900;
+}
+
+/* Style for the equal button */
+.calculator-button-equal {
+    background-color: #4caf50;
+    color: white;
+}
+
+.calculator-button-equal:hover {
+    background-color: #45a049;
+}
+
+/* Style for the clear button */
+.calculator-button-clear {
+    background-color: #ff3b30;
+    color: white;
+}
+
+.calculator-button-clear:hover {
+    background-color: #e0352d;
+}
