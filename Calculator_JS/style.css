@@ -8,7 +8,7 @@
 /* Basic styling for the body */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #0cb60f;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,8 +17,8 @@ body {
 
 /* Calculator container */
 .calculator {
-    background-color: #fff;
-    border-radius: 10px;
+    background-color: #ac0b0b;
+    border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 280px;
@@ -27,9 +27,9 @@ body {
 /* Display screen */
 .calculator-display {
     background-color: #222;
-    color: white;
+    color: rgb(27, 180, 211);
     font-size: 2em;
-    padding: 20px;
+    padding: 56px;
     border-radius: 5px;
     text-align: right;
     margin-bottom: 20px;
@@ -43,18 +43,18 @@ body {
 }
 
 /* Buttons */
-.calculator-button {
+.buttons {
     background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 0.3px solid #50ff6a;
+    border-radius:11px;
     font-size: 1.5em;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.calculator-button:hover {
+.buttons:hover {
     background-color: #e0e0e0;
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .calculator-button-operator:hover {
-    background-color: #e68900;
+    background-color: #f6d199;
 }
 
 /* Style for the equal button */

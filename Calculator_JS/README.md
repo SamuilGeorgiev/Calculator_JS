@@ -8,15 +8,6 @@ A basic calculator built with HTML, CSS, and JavaScript. Supports basic arithmet
 - Handles invalid expressions gracefully
 - Built using only vanilla JS (no libraries)
 
-## Folder Structure
-
-project/
-│
-├── index.html # HTML layout
-├── style.css # Styles for calculator UI
-└── script.js # JavaScript logic
-
-
 ## How to Use
 
 1. Clone or download this repo.
