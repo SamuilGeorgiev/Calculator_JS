@@ -20,7 +20,3 @@ A basic calculator built with HTML, CSS, and JavaScript. Supports basic arithmet
 - HTML5
 - CSS3
 - JavaScript (ES6)
-
----
-
-> This calculator is built for learning purposes and uses `eval()` for expression evaluation. For production, use a math parser library instead.

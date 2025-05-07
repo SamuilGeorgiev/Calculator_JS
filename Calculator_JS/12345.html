@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .calculator {
+            width: 320px;
+            border: 2px solid #4a5568; /* gray-700 */
+            border-radius: 0.5rem;  /* rounded-lg */
+            padding: 1rem;           /* p-4 */
+            background-color: #2d3748;  /* gray-800 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);  /* shadow-md */
+        }
+
+        .display {
+            width: 100%;
+            padding: 0.75rem 1rem;      /* py-3 px-4 */
+            margin-bottom: 1rem;         /* mb-4 */
+            font-size: 1.5rem;         /* text-2xl */
+            text-align: right;
+            background-color: #edf2f7;  /* gray-200 */
+            border: 1px solid #cbd5e0;  /* gray-400 */
+            border-radius: 0.375rem;  /* rounded-md */
+            overflow: hidden;          /* Ensure long numbers don't overflow */
+            white-space: nowrap;      /* Prevent text wrapping */
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); /* Inner shadow, more subtle */
+            word-wrap: break-word;      /* Handle very long numbers */
+            min-height: 2.75rem;       /* Ensure display doesn't collapse when empty. */
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;            /* gap-2 */
+        }
+        .button {
+             padding: 0.75rem 0;       /* py-3  */
+            font-size: 1.25rem;     /* text-xl */
+            text-align: center;
+            border: 1px solid #4a5568;  /* gray-700 */
+            border-radius: 0.375rem;  /* rounded-md */
+            cursor: pointer;
+            transition: background-color 0.2s ease; /* Smooth transition */
+            background-color: #4a5568; /* gray-700 */
+            color: #fff;
+        }
+
+      .button:hover {
+            background-color: #718096;  /* hover:bg-gray-600 */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);  /* hover:shadow-sm approximation */
+      }
+      .number, .decimal {
+          background-color: #6b7280; /* gray-600 */
+      }
+      .number:hover, .decimal:hover{
+         background-color: #9ca3af; /* hover:bg-gray-400 */
+      }
+
+      .operator {
+            background-color: #f59e0b;  /* orange-500 */
+        }
+
+       .operator:hover {
+            background-color: #ed8936;  /* hover:bg-orange-600 */
+        }
+        .equals {
+            background-color: #48bb78; /* green-500 */
+        }
+        .equals:hover {
+             background-color: #38a169; /* hover:bg-green-600 */
+        }
+
+        .clear, .delete {
+            background-color: #e53e3e; /* red-600 */
+        }
+
+        .clear:hover, .delete:hover {
+            background-color: #c53030; /* hover:bg-red-700 */
+        }
+
+        /* Span the clear button across two columns */
+        .clear {
+            grid-column: span 2;
+        }
+         /* Span the delete button across two columns */
+        .delete{
+           grid-column: span 2;
+        }
+        .zero{
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen font-sans">
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button delete" onclick="deleteDigit()">DEL</button>
+            <button class="button operator" onclick="appendOperator('/')">÷</button>
+            <button class="button number" onclick="appendNumber('7')">7</button>
+            <button class="button number" onclick="appendNumber('8')">8</button>
+            <button class="button number" onclick="appendNumber('9')">9</button>
+            <button class="button operator" onclick="appendOperator('*')">×</button>
+            <button class="button number" onclick="appendNumber('4')">4</button>
+            <button class="button number" onclick="appendNumber('5')">5</button>
+            <button class="button number" onclick="appendNumber('6')">6</button>
+            <button class="button operator" onclick="appendOperator('-')">-</button>
+            <button class="button number" onclick="appendNumber('1')">1</button>
+            <button class="button number" onclick="appendNumber('2')">2</button>
+            <button class="button number" onclick="appendNumber('3')">3</button>
+            <button class="button operator" onclick="appendOperator('+')">+</button>
+            <button class="button number zero" onclick="appendNumber('0')">0</button>
+            <button class="button decimal" onclick="appendDecimal()">.</button>
+            <button class="button equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '0';
+        let previousInputs = []; // Stack to store history of operands and operators
+
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+        }
+
+        function appendNumber(number) {
+            if (currentInput === '0' || currentInput === 'Infinity' || currentInput === '-Infinity' || isNaN(parseFloat(currentInput))) {
+                currentInput = number;
+            } else {
+                currentInput += number;
+            }
+            updateDisplay();
+        }
+
+        function appendDecimal() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+                updateDisplay();
+            }
+        }
+
+        function appendOperator(operator) {
+            if (currentInput !== '0' && currentInput !== '-' && !isNaN(parseFloat(currentInput)) && !['+', '-', '*', '/'].includes(currentInput)) {
+                 previousInputs.push(currentInput);
+                 previousInputs.push(operator);
+                 currentInput = operator;
+                 updateDisplay()
+            }
+            else if (['+', '-', '*', '/'].includes(currentInput) && operator !== currentInput){
+                 // Replace the last operator with the new one
+                 previousInputs[previousInputs.length-1] = operator;
+                 currentInput = operator;
+                 updateDisplay()
+            }
+             else if (currentInput === '0' && operator === '-') {
+                currentInput = '-'; // Allow starting with a negative sign
+                previousInputs.push(currentInput);
+                updateDisplay();
+            }
+        }
+
+
+
+        function calculate() {
+           if (currentInput === '0' && previousInputs.length === 0){
+                return;
+           }
+            let expression = [...previousInputs, currentInput].join('');
+            try {
+                // Use a safer alternative to eval
+                const result = new Function('return ' + expression.replace(/÷/g, '/').replace(/×/g, '*'))();
+                currentInput = String(result);
+                previousInputs = [];
+                updateDisplay();
+            } catch (error) {
+                currentInput = 'Error';
+                previousInputs = [];
+                updateDisplay();
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            previousInputs = [];
+            updateDisplay();
+        }
+
+        function deleteDigit() {
+            currentInput = currentInput.slice(0, -1);
+            if (currentInput === '') {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
